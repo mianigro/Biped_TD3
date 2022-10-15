@@ -5,7 +5,7 @@ import gym
 class BipedEnv:
 
     def __init__(self):
-        self.env = gym.make("BipedalWalker-v3", render_mode="rgb_array")
+        self.env = gym.make("BipedalWalker-v3", render_mode="rgb_array")  # human or rgb_array
         self.state_size = self.env.observation_space.shape[0]  # Shape of state array
         self.n_actions = self.env.action_space.shape[0]  # Amount of actions options
         self.max_actions = self.env.action_space.high[0]
@@ -24,8 +24,8 @@ class BipedEnv:
 
     def reset_env(self):
         state = self.env.reset()
-        return state
+        return state[0]
 
     def env_action(self, action):
-        next_state, reward, done, extra = self.env.step(action)
+        next_state, reward, done, extra, _ = self.env.step(action)
         return next_state, reward, done, extra
